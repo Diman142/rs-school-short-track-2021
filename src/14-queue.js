@@ -11,17 +11,40 @@
  *
  */
 
+const Node = function (data) {
+  this.data = data;
+  this.next = null;
+};
+
 class Queue {
-  get size() {
-    throw new Error('Not implemented');
+  constructor(head = 0, tail = 0) {
+    this.head = head;
+    this.tail = tail;
   }
 
-  enqueue(/* element */) {
-    throw new Error('Not implemented');
+  get size() {
+    return this.tail - this.head;
+  }
+
+  enqueue(element) {
+    const newNode = new Node(element);
+
+    if (this.head === 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      this.tail = newNode;
+    }
   }
 
   dequeue() {
-    throw new Error('Not implemented');
+    let newNode;
+    if (this.head !== 0) {
+      newNode = this.head.data;
+      this.head = this.head.next;
+    }
+    return newNode;
   }
 }
 
